@@ -20,7 +20,7 @@ if __name__ == "__main__":
     N = 20
     x = np.empty((4*N, 2))
     means = [(-1, 1), (1, 1), (1, -1), (-1, -1)]
-    sigmas = [np.eye(2), 2*np.eye(2), np.diag((1,2)), np.array(((2,1),(1,2)))]
+    sigmas = [np.eye(2), 2*np.eye(2), np.diag((1,  2)), np.array(((2, 1),(1, 2)))]
     for i in range(4):
         mn = stats.multivariate_normal(means[i], sigmas[i]*0.3)
         x[i*N:(i+1)*N, :] = mn.rvs(N)
