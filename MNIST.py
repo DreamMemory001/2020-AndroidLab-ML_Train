@@ -39,7 +39,6 @@ def save_result(model):
 if __name__ == "__main__":
     # 选择是还是SVM 还是RF 替换，为了使大家可以进行比较
     classifier_type = 'SVM'
-
     print('载入训练数据...')
     t = time()
     data = pd.read_csv('./data/MNIST.train.csv', header=0, dtype=np.int)
@@ -85,9 +84,11 @@ if __name__ == "__main__":
         # params = {'C':np.logspace(1, 4, 4, base=10), 'gamma':np.logspace(-10, -2, 9, base=10)}
         # clf = svm.SVC(kernel='rbf')
         # model = GridSearchCV(clf, param_grid=params, cv=3)
+        # 模型训练
         model = svm.SVC(C=1000, kernel='rbf', gamma=1e-10)
         print('SVM开始训练...')
         t = time()
+        # 喂数据
         model.fit(x, y)
         t = time() - t
         print('SVM训练结束，耗时%d分钟%.3f秒' % (int(t/60), t - 60*int(t/60)))
@@ -96,6 +97,7 @@ if __name__ == "__main__":
         # print 'model.cv_results_ ='
         # pprint(model.cv_results_)
         t = time()
+        # 预测
         y_hat = model.predict(x)
         t = time() - t
         print('SVM训练集准确率：%.3f%%，耗时%d分钟%.3f秒' % (accuracy_score(y, y_hat)*100, int(t/60), t - 60*int(t/60)))
@@ -104,6 +106,7 @@ if __name__ == "__main__":
         t = time() - t
         print('SVM测试集准确率：%.3f%%，耗时%d分钟%.3f秒' % (accuracy_score(y_test, y_test_hat)*100, int(t/60), t - 60*int(t/60)))
         save_result(model)
+    # 随机森林
     elif classifier_type == 'RF':
         rfc = RandomForestClassifier(100, criterion='gini', min_samples_split=2,
                                      min_impurity_decrease=1e-10, bootstrap=True, oob_score=True)

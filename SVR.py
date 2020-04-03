@@ -9,18 +9,21 @@ import matplotlib.pyplot as plt
 if __name__ == "__main__":
     N = 50
     np.random.seed(0)
+    # 随机来点数据
     x = np.sort(np.random.uniform(0, 6, N), axis=0)
     y = 2*np.sin(x) + 0.1*np.random.randn(N)
     x = x.reshape(-1, 1)
     print('x =\n', x)
     print('y =\n', y)
-
+    # RBF核
     print('SVR - RBF')
     svr_rbf = svm.SVR(kernel='rbf', gamma=0.2, C=100)
     svr_rbf.fit(x, y)
+    # 线性核
     print('SVR - Linear')
     svr_linear = svm.SVR(kernel='linear', C=100, gamma=0.2)
     svr_linear.fit(x, y)
+    # 多项式核
     print('SVR - Polynomial')
     svr_poly = svm.SVR(kernel='poly', degree=3, C=100, gamma=0.2)
     svr_poly.fit(x, y)
@@ -32,6 +35,7 @@ if __name__ == "__main__":
     y_linear = svr_linear.predict(x_test)
     y_poly = svr_poly.predict(x_test)
 
+    # 可视化操作
     plt.figure(figsize=(9, 8), facecolor='w')
     plt.plot(x_test, y_rbf, 'r-', linewidth=2, label='RBF Kernel')
     plt.plot(x_test, y_linear, 'g-', linewidth=2, label='Linear Kernel')

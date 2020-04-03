@@ -1,5 +1,4 @@
-#!/usr/bin/python
-# -*- coding:utf-8 -*-
+
 
 import numpy as np
 from sklearn import svm
@@ -18,7 +17,7 @@ if __name__ == "__main__":
     x, y = np.split(data, (2, ), axis=1)
     y = y.ravel()
 
-    # 分类器
+    # 初始化多个分类器
     clf_param = (('linear', 0.1), ('linear', 0.5), ('linear', 1), ('linear', 2),
                 ('rbf', 1, 0.1), ('rbf', 1, 1), ('rbf', 1, 10), ('rbf', 1, 100),
                 ('rbf', 5, 0.1), ('rbf', 5, 1), ('rbf', 5, 10), ('rbf', 5, 100))
